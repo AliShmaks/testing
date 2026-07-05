@@ -2249,7 +2249,7 @@
   /* ===== MOBILE PERFUME CLASSES ===== */
 .mobile-armani {
   position: absolute;
-  top: 45%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 30;
@@ -2401,3 +2401,4 @@
   z-index: 25;
   opacity: 0;
 }
+
