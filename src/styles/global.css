@@ -2372,7 +2372,6 @@
 }
 
 
-
 /* Hide desktop on mobile, hide mobile on desktop */
 @media (max-width: 768px) {
   .desktop-stack {
@@ -2380,12 +2379,7 @@
   }
 }
 
-@media (min-width: 769px) {
-  .mobile-armani,
-  .mobile-perfume {
-    display: none !important;
-  }
-}
+
 
 
 /* DESKTOP - Left image stops BEFORE center */
