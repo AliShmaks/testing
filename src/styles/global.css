@@ -1966,12 +1966,12 @@ HOME PAGE - GSAP ANIMATION STYLES
     
     .side-burger-left {
         left: -10% !important;
-        top: 40% !important;
+        top: 2% !important;
     }
     
     .side-burger-right {
         right: -10% !important;
-        bottom: 40% !important;
+        bottom: 2% !important;
     }
     
     .burger-left,
