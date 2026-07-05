@@ -2371,48 +2371,7 @@
   box-shadow: 0 0 20px rgba(139, 26, 26, 0.3);
 }
 
-/* ===== IPHONE SE OVERRIDES ===== */
-@media (max-width: 480px) {
-  .mobile-armani {
-    top: 48% !important;
-    width: 100% !important;
-    left: 20%;
-    max-width: 400px !important;
-  }
-  
-  .mobile-armani img {
-    width: 150% !important;
-  }
-  
-  .mobile-perfume {
-    width: 55% !important;
-    max-width: 200px !important;
-  }
-  
-  .mobile-perfume-4 {
-    width: 50% !important;
-    max-width: 180px !important;
-  }
-  
-  .double-logo img {
-    width: 50px !important;
-    height: 50px !important;
-  }
-  
-  .double-title {
-    font-size: clamp(1.2rem, 4vw, 1.8rem) !important;
-    letter-spacing: 2px !important;
-  }
-  
-  .double-badge {
-    font-size: 0.5rem !important;
-    padding: 2px 12px !important;
-    letter-spacing: 2px !important;
-  }
-  
-  
-  
-}
+
 
 /* Hide desktop on mobile, hide mobile on desktop */
 @media (max-width: 768px) {
