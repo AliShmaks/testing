@@ -1623,7 +1623,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 
 .side-burger {
     position: absolute;
-    z-index: 6;
+    z-index: 1;
     width: 400px;
     height: auto;
     pointer-events: none;
@@ -1810,7 +1810,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* DESKTOP - Under Images */
 .under-image-left {
     position: absolute;
-    left: 14%;
+    left: 11%;
     top: 24%;
     width: 550px;
     z-index: 25;
@@ -1819,7 +1819,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 
 .under-image-right {
     position: absolute;
-    right: 21%;
+    right: 19%;
     top: 35%;
     width: 300px;
     z-index: 25;
@@ -1829,7 +1829,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== MOBILE PERFUME CLASSES ===== */
 .mobile-armani {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 30;
@@ -1849,7 +1849,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 
 .mobile-perfume {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 28;
@@ -1961,6 +1961,7 @@ HOME PAGE - GSAP ANIMATION STYLES
     }
     
     .side-burger {
+          z-index: 1 !important;
         width: 220px !important;
     }
     
@@ -2052,7 +2053,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== IPHONE SE OVERRIDES ===== */
 @media (max-width: 480px) {
     .mobile-armani {
-        top: 50% !important;
+        top: 45% !important;
         width: 100% !important;
         left: 20% !important;
         max-width: 400px !important;
@@ -2189,5 +2190,125 @@ HOME PAGE - GSAP ANIMATION STYLES
     .about-section-new p {
         font-size: clamp(0.9rem, 2.5vw, 1.2rem);
         padding: 0 10px;
+    }
+}
+
+
+/* ==============================================
+   TABLET / IPAD SPECIFIC FIXES
+   ============================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Fix the double perfume section images */
+    .double-text-section {
+        padding: 0 5%;
+        gap: 20px;
+    }
+    
+    .double-text-left,
+    .double-text-right {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .double-title {
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+    }
+    
+    /* FIX: Under images - center them properly on iPad */
+    .under-image-left {
+        position: absolute !important;
+        left: 50% !important;
+        top: 30% !important;
+        transform: translateX(1%) !important;
+        width: 450px !important;
+        z-index: 25;
+        opacity: 0;
+    }
+    
+    .under-image-right {
+        position: absolute !important;
+        left: 50% !important;
+        top: 38% !important;
+        transform: translateX(-160%) !important;
+        width: 220px !important;
+        z-index: 25;
+        opacity: 0;
+    }
+    
+    /* Make sure the text sections are properly positioned */
+    .double-text-right {
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        transform: none !important;
+        margin-top: 0 !important;
+    }
+    
+    /* Fix side perfumes on iPad */
+    .side-burger {
+        width: 280px !important;
+    }
+    
+    .side-burger-left {
+        left: -5% !important;
+        top: 2% !important;
+    }
+    
+    .side-burger-right {
+        right: -5% !important;
+        bottom: 2% !important;
+    }
+    
+    /* Fix main perfume size on iPad */
+    .burger {
+        width: 200px !important;
+    }
+    
+    /* Fix header text on iPad */
+    .header-section .main-title {
+        font-size: 3.5rem !important;
+    }
+    
+    /* Fix delivery text on iPad */
+    .delivery-text h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem) !important;
+    }
+    
+    .delivery-burger {
+        width: 300px !important;
+        top: 35% !important;
+    }
+    
+    /* Fix slide-in perfumes on iPad */
+    .burger-left {
+        width: 320px !important;
+        top: 39% !important;
+    }
+    
+    .burger-right {
+        width: 180px !important;
+        top: 42% !important;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Fix P2, P3, P4 positions on iPad */
+    .desktop-perfume-2 {
+        top: 50% !important;
+        right: 15% !important;
+        width: 250px !important;
+    }
+    
+    .desktop-perfume-3 {
+        top: 49.2% !important;
+        right: 9% !important;
+        width: 300px !important;
+    }
+    
+    .desktop-perfume-4 {
+        top: 51% !important;
+        right: 20% !important;
+        width: 220px !important;
     }
 }
