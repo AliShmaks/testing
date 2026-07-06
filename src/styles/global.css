@@ -1861,21 +1861,21 @@ HOME PAGE - GSAP ANIMATION STYLES
 .mobile-perfume-2 { 
     z-index: 28;
     top: 45% !important;
-    width: 60% !important;      /* ← P2 size */
+    width: 60% !important;
     max-width: 250px !important;
 }
 
 .mobile-perfume-3 { 
     z-index: 26;
     top: 50% !important;
-    width: 55% !important;      /* ← P3 size */
+    width: 55% !important;
     max-width: 220px !important;
 }
 
 .mobile-perfume-4 { 
     z-index: 24; 
     top: 50% !important;
-    width: 50% !important;      /* ← P4 size */
+    width: 50% !important;
     max-width: 200px !important;
 }
 
@@ -2066,7 +2066,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== IPHONE SE OVERRIDES ===== */
 @media (max-width: 480px) {
     .mobile-armani {
-        top: 60% !important;
+        top: 54% !important;
         width: 100% !important;
         left: 20% !important;
         max-width: 400px !important;
@@ -2303,10 +2303,7 @@ HOME PAGE - GSAP ANIMATION STYLES
         width: 180px !important;
         top: 42% !important;
     }
-}
 
-@media (min-width: 769px) and (max-width: 1024px) {
-    /* Fix P2, P3, P4 positions on iPad */
     .desktop-perfume-2 {
         top: 50% !important;
         right: 15% !important;
