@@ -2066,7 +2066,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== IPHONE SE OVERRIDES ===== */
 @media (max-width: 480px) {
     .mobile-armani {
-        top: 5% !important;
+        top: 55% !important;
         width: 100% !important;
         left: 20% !important;
         max-width: 400px !important;
