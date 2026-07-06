@@ -49,6 +49,34 @@ const Home = () => {
 
   useEffect(() => {
     const loadGSAP = async () => {
+      // Wait for images to load first
+      await new Promise((resolve) => {
+        const images = document.querySelectorAll('img');
+        let loaded = 0;
+        const total = images.length;
+        
+        if (total === 0) {
+          resolve();
+          return;
+        }
+        
+        images.forEach(img => {
+          if (img.complete) {
+            loaded++;
+            if (loaded === total) resolve();
+          } else {
+            img.addEventListener('load', () => {
+              loaded++;
+              if (loaded === total) resolve();
+            });
+            img.addEventListener('error', () => {
+              loaded++;
+              if (loaded === total) resolve();
+            });
+          }
+        });
+      });
+
       const gsapModule = await import('gsap')
       const ScrollTriggerModule = await import('gsap/ScrollTrigger')
       const gsap = gsapModule.default
@@ -56,7 +84,47 @@ const Home = () => {
 
       gsap.registerPlugin(ScrollTrigger)
 
-      // ✅ PROFESSIONAL WAY: Use matchMedia
+      // ✅ FIX: Set initial positions for mobile perfumes
+      gsap.set(mobileArmaniRef.current, {
+        opacity: 0,
+        scale: 0.7,
+        x: '-80vw',
+        y: 0,
+        position: 'absolute',
+        top: '50%',
+        left: '50%'
+      });
+
+      gsap.set(mobilePerfume2Ref.current, {
+        opacity: 0,
+        scale: 0.7,
+        x: '0vw',
+        y: '10vh',
+        position: 'absolute',
+        top: '50%',
+        left: '50%'
+      });
+
+      gsap.set(mobilePerfume3Ref.current, {
+        opacity: 0,
+        scale: 0.7,
+        x: '0vw',
+        y: '10vh',
+        position: 'absolute',
+        top: '50%',
+        left: '50%'
+      });
+
+      gsap.set(mobilePerfume4Ref.current, {
+        opacity: 0,
+        scale: 0.7,
+        x: '0vw',
+        y: '10vh',
+        position: 'absolute',
+        top: '50%',
+        left: '50%'
+      });
+
       const mm = gsap.matchMedia()
 
       // ============================================
@@ -91,7 +159,6 @@ const Home = () => {
           repeat: -1
         })
 
-        // Main scroll timeline
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -141,17 +208,21 @@ const Home = () => {
           ease: 'power2.in'
         }, 2.3)
 
-        // MOBILE SEQUENTIAL ANIMATION
+        // ✅ FIX: Mobile sequential animations with consistent positioning
         tl.fromTo(mobileArmaniRef.current, {
           opacity: 0,
           scale: 0.7,
           x: '-80vw',
-          y: 0
+          y: 0,
+          top: '50%',
+          left: '50%'
         }, {
           opacity: 1,
           scale: 1,
           x: '0vw',
           y: 0,
+          top: '50%',
+          left: '50%',
           duration: 1.5,
           ease: 'power3.out'
         }, 3)
@@ -168,12 +239,16 @@ const Home = () => {
           opacity: 0,
           scale: 0.7,
           x: '0vw',
-          y: '10vh'
+          y: '10vh',
+          top: '50%',
+          left: '50%'
         }, {
           opacity: 1,
           scale: 1,
-          x: '0vw',
+          x: '-20vw',
           y: '0vh',
+          top: '50%',
+          left: '50%',
           duration: 1.5,
           ease: 'power3.out'
         }, 4.5)
@@ -182,12 +257,16 @@ const Home = () => {
           opacity: 0,
           scale: 0.7,
           x: '0vw',
-          y: '10vh'
+          y: '10vh',
+          top: '50%',
+          left: '50%'
         }, {
           opacity: 1,
           scale: 1,
-          x: '-25vw',
+          x: '0vw',
           y: '0vh',
+          top: '50%',
+          left: '50%',
           duration: 1.5,
           ease: 'power3.out'
         }, 4.5)
@@ -196,12 +275,16 @@ const Home = () => {
           opacity: 0,
           scale: 0.7,
           x: '0vw',
-          y: '10vh'
+          y: '10vh',
+          top: '50%',
+          left: '50%'
         }, {
           opacity: 1,
           scale: 1,
-          x: '25vw',
+          x: '20vw',
           y: '0vh',
+          top: '50%',
+          left: '50%',
           duration: 1.5,
           ease: 'power3.out'
         }, 4.5)
@@ -296,7 +379,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 8.5)
 
-        // FINAL DOUBLE PERFUME SECTION - MOBILE
         tl.to(doubleTextRef.current, {
           opacity: 1,
           duration: 0.3,
@@ -315,7 +397,6 @@ const Home = () => {
           ease: 'power2.out'
         }, 9.0)
 
-        // ✅ FIXED: Use xPercent for mobile too
         tl.fromTo(underLeftRef.current, {
           opacity: 0,
           xPercent: -150,
@@ -354,7 +435,6 @@ const Home = () => {
           ease: 'power2.out'
         }, 11.5)
 
-        // ✅ FIXED: Use xPercent for mobile too
         tl.fromTo(underRightRef.current, {
           opacity: 0,
           xPercent: 150,
@@ -377,7 +457,6 @@ const Home = () => {
       // 2️⃣ TABLET: 769px - 1024px
       // ============================================
       mm.add("(min-width: 769px) and (max-width: 1024px)", () => {
-        // AUTO-SWINGING ANIMATION
         gsap.to(perfumeRef.current, {
           x: '3vw',
           rotation: 5,
@@ -416,7 +495,6 @@ const Home = () => {
           defaults: { ease: 'power1.inOut' }
         })
 
-        // TABLET ANIMATIONS (same as desktop but with tablet-friendly values)
         tl.to(perfumeRef.current, {
           marginTop: '1.5vh',
           duration: 1.0,
@@ -454,7 +532,6 @@ const Home = () => {
           ease: 'power2.in'
         }, 2.3)
 
-        // TABLET PERFUME STACKS
         tl.fromTo(perfumeStackRef.current, {
           opacity: 0,
           scale: 0.5,
@@ -487,14 +564,12 @@ const Home = () => {
           opacity: 0,
           scale: 0.9,
           x: '5vw',
-          y: '0vh',
-          zIndex: 26
+          y: '0vh'
         }, {
           opacity: 1,
           scale: 1,
           x: '-2vw',
           y: '0vh',
-          zIndex: 26,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.0)
@@ -503,14 +578,12 @@ const Home = () => {
           opacity: 0,
           scale: 0.85,
           x: '5vw',
-          y: '0vh',
-          zIndex: 24
+          y: '0vh'
         }, {
           opacity: 1,
           scale: 1,
           x: '-2.5vw',
           y: '0vh',
-          zIndex: 24,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.8)
@@ -618,7 +691,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 7.5)
 
-        // FINAL DOUBLE PERFUME SECTION - TABLET
         tl.to(doubleTextRef.current, {
           opacity: 1,
           duration: 0.3,
@@ -653,7 +725,6 @@ const Home = () => {
           ease: 'power2.out'
         }, 8.5)
 
-        // ✅ TABLET: Side by side, not centered
         tl.fromTo(underLeftRef.current, {
           opacity: 0,
           xPercent: -120,
@@ -688,7 +759,6 @@ const Home = () => {
       // 3️⃣ DESKTOP: 1025px and above
       // ============================================
       mm.add("(min-width: 1025px)", () => {
-        // AUTO-SWINGING ANIMATION
         gsap.to(perfumeRef.current, {
           x: '3vw',
           rotation: 5,
@@ -727,7 +797,6 @@ const Home = () => {
           defaults: { ease: 'power1.inOut' }
         })
 
-        // DESKTOP ANIMATIONS (Your original code)
         tl.to(perfumeRef.current, {
           marginTop: '1.5vh',
           duration: 1.0,
@@ -797,14 +866,12 @@ const Home = () => {
           opacity: 0,
           scale: 0.9,
           x: '7vw',
-          y: '0vh',
-          zIndex: 26
+          y: '0vh'
         }, {
           opacity: 1,
           scale: 1,
           x: '-3vw',
           y: '0vh',
-          zIndex: 26,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.0)
@@ -813,14 +880,12 @@ const Home = () => {
           opacity: 0,
           scale: 0.85,
           x: '7vw',
-          y: '0vh',
-          zIndex: 24
+          y: '0vh'
         }, {
           opacity: 1,
           scale: 1,
           x: '-3.9vw',
           y: '0vh',
-          zIndex: 24,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.8)
@@ -998,13 +1063,28 @@ const Home = () => {
     }
 
     loadGSAP()
+
+    const handleResize = () => {
+      if (typeof ScrollTrigger !== 'undefined') {
+        setTimeout(() => {
+          ScrollTrigger.refresh()
+        }, 200)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
+    }
   }, [])
 
   return (
     <>
       <Navbar />
       
-      {/* ===== STICKY SECTION ===== */}
       <section className="section" ref={sectionRef}>
         <div className="sticky-wrap" ref={stickyRef}>
           <div className="bg-glow" ref={glowRef}></div>
@@ -1046,16 +1126,10 @@ const Home = () => {
           />
 
           {/* ===== MOBILE SEQUENTIAL PERFUMES ===== */}
-          
-          {/* 1️⃣ ARMANI - Mobile only */}
           <div ref={mobileArmaniRef} className="mobile-armani">
-            <img 
-              src={armani} 
-              alt="Giorgio Armani"
-            />
+            <img src={armani} alt="Giorgio Armani" />
           </div>
 
-          {/* 2️⃣ PERFUME 2 - Mobile only */}
           <img 
             ref={mobilePerfume2Ref}
             className="mobile-perfume mobile-perfume-2"
@@ -1063,7 +1137,6 @@ const Home = () => {
             alt="Perfume 2"
           />
 
-          {/* 3️⃣ PERFUME 3 - Mobile only */}
           <img 
             ref={mobilePerfume3Ref}
             className="mobile-perfume mobile-perfume-3"
@@ -1071,7 +1144,6 @@ const Home = () => {
             alt="Perfume 3"
           />
 
-          {/* 4️⃣ PERFUME 4 - Mobile only */}
           <img 
             ref={mobilePerfume4Ref}
             className="mobile-perfume mobile-perfume-4"
@@ -1080,16 +1152,10 @@ const Home = () => {
           />
 
           {/* ===== DESKTOP PERFUME STACKS ===== */}
-          
-          {/* GIORGIO ARMANI - Desktop only */}
           <div ref={perfumeStackRef} className="desktop-stack desktop-armani">
-            <img 
-              src={armani} 
-              alt="Giorgio Armani"
-            />
+            <img src={armani} alt="Giorgio Armani" />
           </div>
 
-          {/* PERFUME 2 - Desktop only */}
           <img 
             ref={perfumeStack2Ref}
             className="desktop-stack desktop-perfume-2"
@@ -1097,7 +1163,6 @@ const Home = () => {
             alt="Perfume 2"
           />
 
-          {/* PERFUME 3 - Desktop only */}
           <img 
             ref={perfumeStack3Ref}
             className="desktop-stack desktop-perfume-3"
@@ -1105,7 +1170,6 @@ const Home = () => {
             alt="Perfume 3"
           />
 
-          {/* PERFUME 4 - Desktop only */}
           <img 
             ref={perfumeStack4Ref}
             className="desktop-stack desktop-perfume-4"
@@ -1145,25 +1209,17 @@ const Home = () => {
 
           {/* ===== DOUBLE PERFUME SECTION ===== */}
           <div className="double-text-section" ref={doubleTextRef}>
-            {/* LEFT PERFUME */}
             <div className="double-text-left" ref={doubleLeftRef}>
               <div className="double-logo">
-                <img 
-                  src={logo} 
-                  alt="Logo"
-                />
+                <img src={logo} alt="Logo" />
               </div>
               <div className="double-title">ARMANI CODE</div>
               <div className="double-badge">EAU DE PARFUM</div>
             </div>
 
-            {/* RIGHT PERFUME */}
             <div className="double-text-right" ref={doubleRightRef}>
               <div className="double-logo">
-                <img 
-                  src={logo} 
-                  alt="Logo"
-                />
+                <img src={logo} alt="Logo" />
               </div>
               <div className="double-title">Sì</div>
               <div className="double-badge">EAU DE PARFUM</div>
@@ -1185,7 +1241,6 @@ const Home = () => {
             alt="Sauvage"
             onError={(e) => { e.target.src = 'https://emojicdn.elk.sh/🧴?size=200' }}
           />
-
         </div>
       </section>
 
