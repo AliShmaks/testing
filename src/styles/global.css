@@ -1829,8 +1829,6 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== MOBILE PERFUME CLASSES ===== */
 .mobile-armani {
     position: absolute;
-    top: 45%;
-    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 30;
     opacity: 0;
@@ -2053,7 +2051,7 @@ HOME PAGE - GSAP ANIMATION STYLES
 /* ===== IPHONE SE OVERRIDES ===== */
 @media (max-width: 480px) {
     .mobile-armani {
-        top: 45% !important;
+        top: 49% !important;
         width: 100% !important;
         left: 20% !important;
         max-width: 400px !important;
