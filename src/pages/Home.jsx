@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Navbar, Footer } from '../components/Layout'
 import { Link } from 'react-router-dom'
 
@@ -56,94 +56,92 @@ const Home = () => {
 
       gsap.registerPlugin(ScrollTrigger)
 
-      const isMobile = window.innerWidth <= 768
+      // ✅ PROFESSIONAL WAY: Use matchMedia
+      const mm = gsap.matchMedia()
 
-      // AUTO-SWINGING ANIMATION (for perfume)
-      gsap.to(perfumeRef.current, {
-        x: '3vw',
-        rotation: 5,
-        duration: 3.0,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1
-      })
+      // ============================================
+      // 1️⃣ MOBILE: 0 - 768px
+      // ============================================
+      mm.add("(max-width: 768px)", () => {
+        // AUTO-SWINGING ANIMATION
+        gsap.to(perfumeRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
 
-      gsap.to(sideRightRef.current, {
-        x: '-3vw',
-        rotation: -5,
-        duration: 3.0,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1
-      })
+        gsap.to(sideRightRef.current, {
+          x: '-3vw',
+          rotation: -5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
 
-      gsap.to(sideLeftRef.current, {
-        x: '3vw',
-        rotation: 5,
-        duration: 3.0,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1
-      })
+        gsap.to(sideLeftRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
 
-      // Main scroll timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 2,
-          invalidateOnRefresh: true
-        },
-        defaults: { ease: 'power1.inOut' }
-      })
+        // Main scroll timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 2,
+            invalidateOnRefresh: true
+          },
+          defaults: { ease: 'power1.inOut' }
+        })
 
-      // 1️⃣ MAIN PERFUME: 100vh → 10vh
-      tl.to(perfumeRef.current, {
-        marginTop: '1.5vh',
-        duration: 1.0,
-        ease: 'power2.inOut'
-      }, 0)
+        // MOBILE ANIMATIONS
+        tl.to(perfumeRef.current, {
+          marginTop: '1.5vh',
+          duration: 1.0,
+          ease: 'power2.inOut'
+        }, 0)
 
-      // 2️⃣ HEADER SECTION: fades out
-      tl.to(headerRef.current, {
-        opacity: 0,
-        y: -50,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, 0.3)
+        tl.to(headerRef.current, {
+          opacity: 0,
+          y: -50,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
 
-      // 3️⃣ SIDE PERFUMES: fade out
-      tl.to(sideLeftRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, 0.3)
+        tl.to(sideLeftRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
 
-      tl.to(sideRightRef.current, {
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.inOut'
-      }, 0.3)
+        tl.to(sideRightRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
 
-      // 4️⃣ MAIN PERFUME: grows BIG
-      tl.to(perfumeRef.current, {
-        scale: 4,
-        duration: 1.8,
-        ease: 'power2.inOut'
-      }, 1.0)
+        tl.to(perfumeRef.current, {
+          scale: 4,
+          duration: 1.8,
+          ease: 'power2.inOut'
+        }, 1.0)
 
-      // 5️⃣ MAIN PERFUME: fades out
-      tl.to(perfumeRef.current, {
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.in'
-      }, 2.3)
+        tl.to(perfumeRef.current, {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.in'
+        }, 2.3)
 
-      if (isMobile) {
-        // ===== MOBILE SEQUENTIAL ANIMATION =====
-        
-        // 1️⃣ ARMANI slides to CENTER from LEFT
+        // MOBILE SEQUENTIAL ANIMATION
         tl.fromTo(mobileArmaniRef.current, {
           opacity: 0,
           scale: 0.7,
@@ -158,7 +156,6 @@ const Home = () => {
           ease: 'power3.out'
         }, 3)
 
-        // 2️⃣ ARMANI goes UP
         tl.to(mobileArmaniRef.current, {
           opacity: 0,
           y: '-30vh',
@@ -167,7 +164,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 4.0)
 
-        // 3️⃣ ALL THREE PERFUMES (P2, P3, P4) APPEAR SIDE BY SIDE
         tl.fromTo(mobilePerfume2Ref.current, {
           opacity: 0,
           scale: 0.7,
@@ -210,7 +206,6 @@ const Home = () => {
           ease: 'power3.out'
         }, 4.5)
 
-        // 4️⃣ ALL THREE GO UP TOGETHER
         tl.to(mobilePerfume2Ref.current, {
           opacity: 0,
           y: '-30vh',
@@ -235,7 +230,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 6.5)
 
-        // 5️⃣ LUXURY COLLECTION TEXT + PERFUME
         tl.fromTo(deliveryTextRef.current, {
           opacity: 0,
           y: 60,
@@ -260,7 +254,6 @@ const Home = () => {
           ease: 'power2.out'
         }, 7.0)
 
-        // 6️⃣ SLIDE-IN PERFUMES (LEFT & RIGHT) - MOBILE
         tl.to(perfumeLeftRef.current, {
           opacity: 0.85,
           x: '-9vw',
@@ -277,7 +270,6 @@ const Home = () => {
           ease: 'power3.out'
         }, 7.5)
 
-        // 7️⃣ FADE OUT LUXURY COLLECTION + SLIDE-IN PERFUMES
         tl.to(deliveryTextRef.current, {
           opacity: 0,
           y: 30,
@@ -304,16 +296,13 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 8.5)
 
-        // 8️⃣ FINAL DOUBLE PERFUME SECTION - MOBILE (SEQUENTIAL)
-        
-        // Show double text section
+        // FINAL DOUBLE PERFUME SECTION - MOBILE
         tl.to(doubleTextRef.current, {
           opacity: 1,
           duration: 0.3,
           ease: 'power1.out'
         }, 9.0)
 
-        // ARMANI CODE (LEFT) - shows FIRST with its image
         tl.fromTo(doubleLeftRef.current, {
           opacity: 0,
           scale: 0.5,
@@ -326,19 +315,19 @@ const Home = () => {
           ease: 'power2.out'
         }, 9.0)
 
+        // ✅ FIXED: Use xPercent for mobile too
         tl.fromTo(underLeftRef.current, {
           opacity: 0,
-          x: '-100vw',
+          xPercent: -150,
           scale: 0.7
         }, {
           opacity: 1,
-          x: '0vw',
+          xPercent: 0,
           scale: 1,
           duration: 1.2,
           ease: 'power3.out'
         }, 9.5)
 
-        // ARMANI CODE and image slide UP and HIDE
         tl.to(doubleLeftRef.current, {
           opacity: 0,
           y: -80,
@@ -353,7 +342,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 10.5)
 
-        // Si (RIGHT) - shows SECOND with its image
         tl.fromTo(doubleRightRef.current, {
           opacity: 0,
           scale: 0.5,
@@ -366,86 +354,167 @@ const Home = () => {
           ease: 'power2.out'
         }, 11.5)
 
+        // ✅ FIXED: Use xPercent for mobile too
         tl.fromTo(underRightRef.current, {
           opacity: 0,
-          x: '60vw',
+          xPercent: 150,
           scale: 0.7
         }, {
           opacity: 1,
-          x: '0vw',
+          xPercent: 0,
           scale: 1,
           duration: 1.2,
           ease: 'power3.out'
         }, 12.0)
 
-      } else {
-        // ===== DESKTOP ANIMATION =====
-        
-        // 6️⃣ GIORGIO ARMANI appears on LEFT
+        return () => {
+          tl.kill()
+          ScrollTrigger.getAll().forEach(st => st.kill())
+        }
+      })
+
+      // ============================================
+      // 2️⃣ TABLET: 769px - 1024px
+      // ============================================
+      mm.add("(min-width: 769px) and (max-width: 1024px)", () => {
+        // AUTO-SWINGING ANIMATION
+        gsap.to(perfumeRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        gsap.to(sideRightRef.current, {
+          x: '-3vw',
+          rotation: -5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        gsap.to(sideLeftRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 2,
+            invalidateOnRefresh: true
+          },
+          defaults: { ease: 'power1.inOut' }
+        })
+
+        // TABLET ANIMATIONS (same as desktop but with tablet-friendly values)
+        tl.to(perfumeRef.current, {
+          marginTop: '1.5vh',
+          duration: 1.0,
+          ease: 'power2.inOut'
+        }, 0)
+
+        tl.to(headerRef.current, {
+          opacity: 0,
+          y: -50,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(sideLeftRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(sideRightRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(perfumeRef.current, {
+          scale: 4,
+          duration: 1.8,
+          ease: 'power2.inOut'
+        }, 1.0)
+
+        tl.to(perfumeRef.current, {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.in'
+        }, 2.3)
+
+        // TABLET PERFUME STACKS
         tl.fromTo(perfumeStackRef.current, {
           opacity: 0,
           scale: 0.5,
-          x: '-60vw',
+          x: '-40vw',
           y: 0
         }, {
           opacity: 1,
           scale: 1,
-          x: '-15vw',
+          x: '-10vw',
           y: 0,
           duration: 1.5,
           ease: 'power3.out'
         }, 2.5)
 
-        // 7️⃣ PERFUME 2 appears on RIGHT
         tl.fromTo(perfumeStack2Ref.current, {
           opacity: 0,
           scale: 0.5,
-          x: '60vw',
+          x: '40vw',
           y: 0
         }, {
           opacity: 1,
           scale: 1,
-          x: '15vw',
+          x: '10vw',
           y: 0,
           duration: 1.5,
           ease: 'power3.out'
         }, 2.5)
 
-      // 8️⃣ PERFUME 3 SLIDES LEFT from BEHIND Perfume 2
         tl.fromTo(perfumeStack3Ref.current, {
           opacity: 0,
           scale: 0.9,
-          x: '7vw',     // ← Starts from right
+          x: '5vw',
           y: '0vh',
-          zIndex: 26     // ← Higher z-index than P4
+          zIndex: 26
         }, {
           opacity: 1,
           scale: 1,
-          x: '-3vw',     // ← Slides left
+          x: '-2vw',
           y: '0vh',
           zIndex: 26,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.0)
 
-        // 9️⃣ PERFUME 4 SLIDES LEFT from BEHIND Perfume 3
         tl.fromTo(perfumeStack4Ref.current, {
           opacity: 0,
           scale: 0.85,
-          x: '7vw',     // ← Starts further right
+          x: '5vw',
           y: '0vh',
-          zIndex: 24     // ← LOWER than P3 (behind)
+          zIndex: 24
         }, {
           opacity: 1,
           scale: 1,
-          x: '-3.9vw',   // ← Slides left
+          x: '-2.5vw',
           y: '0vh',
           zIndex: 24,
           duration: 1.5,
           ease: 'power3.out'
         }, 4.8)
 
-        // 🔟 ALL THREE FADE OUT
         tl.to(perfumeStackRef.current, {
           opacity: 0,
           duration: 0.8,
@@ -470,7 +539,6 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 5.5)
 
-        // 1️⃣1️⃣ TEXT + PERFUME IN MIDDLE
         tl.fromTo(deliveryTextRef.current, {
           opacity: 0,
           y: 60,
@@ -495,10 +563,9 @@ const Home = () => {
           ease: 'power2.out'
         }, 6.0)
 
-        // 1️⃣2️⃣ SLIDE-IN PERFUMES (LEFT & RIGHT)
         tl.to(perfumeLeftRef.current, {
           opacity: 0.85,
-          x: '-9vw',
+          x: '-6vw',
           scale: 0.97,
           duration: 1.2,
           ease: 'power3.out'
@@ -506,13 +573,12 @@ const Home = () => {
 
         tl.to(perfumeRightRef.current, {
           opacity: 1,
-          x: '9vw',
+          x: '6vw',
           scale: 1,
           duration: 1.2,
           ease: 'power3.out'
         }, 6.5)
 
-        // 1️⃣3️⃣ GLOW pulse
         tl.to(glowRef.current, {
           scale: 2,
           opacity: 0.5,
@@ -526,7 +592,6 @@ const Home = () => {
           duration: 1.0
         }, 2.5)
 
-        // 1️⃣4️⃣ FADE OUT 3 PERFUMES + DELIVERY TEXT
         tl.to(perfumeLeftRef.current, {
           opacity: 0,
           duration: 0.8,
@@ -553,14 +618,322 @@ const Home = () => {
           ease: 'power2.inOut'
         }, 7.5)
 
-        // 1️⃣5️⃣ FINAL DOUBLE PERFUME SECTION (DESKTOP)
+        // FINAL DOUBLE PERFUME SECTION - TABLET
         tl.to(doubleTextRef.current, {
           opacity: 1,
           duration: 0.3,
           ease: 'power1.out'
         }, 8.0)
 
-        // Desktop perfumes side by side
+        tl.fromTo(doubleLeftRef.current, {
+          opacity: 0,
+          scale: 0.5,
+          y: 0,
+          x: 0
+        }, {
+          opacity: 1,
+          scale: 0.9,
+          y: 0,
+          x: 0,
+          duration: 1.5,
+          ease: 'power2.out'
+        }, 8.5)
+
+        tl.fromTo(doubleRightRef.current, {
+          opacity: 0,
+          scale: 0.5,
+          y: 0,
+          x: 0
+        }, {
+          opacity: 1,
+          scale: 0.9,
+          y: 0,
+          x: 0,
+          duration: 1.5,
+          ease: 'power2.out'
+        }, 8.5)
+
+        // ✅ TABLET: Side by side, not centered
+        tl.fromTo(underLeftRef.current, {
+          opacity: 0,
+          xPercent: -120,
+          scale: 0.8
+        }, {
+          opacity: 1,
+          xPercent: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, 9.0)
+
+        tl.fromTo(underRightRef.current, {
+          opacity: 0,
+          xPercent: 120,
+          scale: 0.8
+        }, {
+          opacity: 1,
+          xPercent: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, 9.0)
+
+        return () => {
+          tl.kill()
+          ScrollTrigger.getAll().forEach(st => st.kill())
+        }
+      })
+
+      // ============================================
+      // 3️⃣ DESKTOP: 1025px and above
+      // ============================================
+      mm.add("(min-width: 1025px)", () => {
+        // AUTO-SWINGING ANIMATION
+        gsap.to(perfumeRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        gsap.to(sideRightRef.current, {
+          x: '-3vw',
+          rotation: -5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        gsap.to(sideLeftRef.current, {
+          x: '3vw',
+          rotation: 5,
+          duration: 3.0,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 2,
+            invalidateOnRefresh: true
+          },
+          defaults: { ease: 'power1.inOut' }
+        })
+
+        // DESKTOP ANIMATIONS (Your original code)
+        tl.to(perfumeRef.current, {
+          marginTop: '1.5vh',
+          duration: 1.0,
+          ease: 'power2.inOut'
+        }, 0)
+
+        tl.to(headerRef.current, {
+          opacity: 0,
+          y: -50,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(sideLeftRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(sideRightRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 0.3)
+
+        tl.to(perfumeRef.current, {
+          scale: 4,
+          duration: 1.8,
+          ease: 'power2.inOut'
+        }, 1.0)
+
+        tl.to(perfumeRef.current, {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.in'
+        }, 2.3)
+
+        tl.fromTo(perfumeStackRef.current, {
+          opacity: 0,
+          scale: 0.5,
+          x: '-60vw',
+          y: 0
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: '-15vw',
+          y: 0,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, 2.5)
+
+        tl.fromTo(perfumeStack2Ref.current, {
+          opacity: 0,
+          scale: 0.5,
+          x: '60vw',
+          y: 0
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: '15vw',
+          y: 0,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, 2.5)
+
+        tl.fromTo(perfumeStack3Ref.current, {
+          opacity: 0,
+          scale: 0.9,
+          x: '7vw',
+          y: '0vh',
+          zIndex: 26
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: '-3vw',
+          y: '0vh',
+          zIndex: 26,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, 4.0)
+
+        tl.fromTo(perfumeStack4Ref.current, {
+          opacity: 0,
+          scale: 0.85,
+          x: '7vw',
+          y: '0vh',
+          zIndex: 24
+        }, {
+          opacity: 1,
+          scale: 1,
+          x: '-3.9vw',
+          y: '0vh',
+          zIndex: 24,
+          duration: 1.5,
+          ease: 'power3.out'
+        }, 4.8)
+
+        tl.to(perfumeStackRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 5.5)
+
+        tl.to(perfumeStack2Ref.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 5.5)
+
+        tl.to(perfumeStack3Ref.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 5.5)
+
+        tl.to(perfumeStack4Ref.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 5.5)
+
+        tl.fromTo(deliveryTextRef.current, {
+          opacity: 0,
+          y: 60,
+          scale: 0.9
+        }, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power2.out'
+        }, 6.0)
+
+        tl.fromTo(deliveryPerfumeRef.current, {
+          opacity: 0,
+          y: 60,
+          scale: 0.8
+        }, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: 'power2.out'
+        }, 6.0)
+
+        tl.to(perfumeLeftRef.current, {
+          opacity: 0.85,
+          x: '-9vw',
+          scale: 0.97,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, 6.5)
+
+        tl.to(perfumeRightRef.current, {
+          opacity: 1,
+          x: '9vw',
+          scale: 1,
+          duration: 1.2,
+          ease: 'power3.out'
+        }, 6.5)
+
+        tl.to(glowRef.current, {
+          scale: 2,
+          opacity: 0.5,
+          duration: 1.8,
+          ease: 'power2.inOut'
+        }, 1.0)
+
+        tl.to(glowRef.current, {
+          scale: 1,
+          opacity: 0.2,
+          duration: 1.0
+        }, 2.5)
+
+        tl.to(perfumeLeftRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 7.5)
+
+        tl.to(perfumeRightRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 7.5)
+
+        tl.to(deliveryTextRef.current, {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 7.5)
+
+        tl.to(deliveryPerfumeRef.current, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        }, 7.5)
+
+        tl.to(doubleTextRef.current, {
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power1.out'
+        }, 8.0)
+
         tl.fromTo(doubleLeftRef.current, {
           opacity: 0,
           scale: 0.5,
@@ -591,11 +964,11 @@ const Home = () => {
 
         tl.fromTo(underLeftRef.current, {
           opacity: 0,
-          x: '-100vw',
+          xPercent: -150,
           scale: 0.8
         }, {
           opacity: 1,
-          x: '0',
+          xPercent: 0,
           scale: 1,
           duration: 1.2,
           ease: 'power3.out'
@@ -603,21 +976,24 @@ const Home = () => {
 
         tl.fromTo(underRightRef.current, {
           opacity: 0,
-          x: '100vw',
+          xPercent: 150,
           scale: 0.8
         }, {
           opacity: 1,
-          x: '0',
+          xPercent: 0,
           scale: 1,
           duration: 1.2,
           ease: 'power3.out'
         }, 9.0)
-      }
 
-      // Cleanup
+        return () => {
+          tl.kill()
+          ScrollTrigger.getAll().forEach(st => st.kill())
+        }
+      })
+
       return () => {
-        tl.kill()
-        ScrollTrigger.getAll().forEach(st => st.kill())
+        mm.revert()
       }
     }
 
