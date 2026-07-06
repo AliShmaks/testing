@@ -2322,3 +2322,39 @@ HOME PAGE - GSAP ANIMATION STYLES
         width: 220px !important;
     }
 }
+
+
+/* Add these to your existing mobile perfume classes */
+.mobile-perfume-2,
+.mobile-perfume-3,
+.mobile-perfume-4 {
+    contain: layout style paint;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Make sure mobile perfumes are centered properly */
+.mobile-armani {
+    top: 50% !important;
+    left: 20% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.mobile-perfume-2 {
+    top: 48% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.mobile-perfume-3 {
+    top: 51% !important;
+    left: 30% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.mobile-perfume-4 {
+    top: 51% !important;
+    left: 70% !important;
+    transform: translate(-50%, -50%) !important;
+}
