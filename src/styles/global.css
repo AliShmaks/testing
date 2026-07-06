@@ -1858,13 +1858,28 @@ HOME PAGE - GSAP ANIMATION STYLES
     height: auto;
 }
 
-.mobile-perfume-2 { z-index: 28; }
-.mobile-perfume-3 { z-index: 26; }
+.mobile-perfume-2 { 
+    z-index: 28;
+    top: 45% !important;
+    width: 60% !important;      /* ← P2 size */
+    max-width: 250px !important;
+}
+
+.mobile-perfume-3 { 
+    z-index: 26;
+    top: 50% !important;
+    width: 55% !important;      /* ← P3 size */
+    max-width: 220px !important;
+}
+
 .mobile-perfume-4 { 
     z-index: 24; 
-    width: 65%;
-    max-width: 280px;
+    top: 50% !important;
+    width: 50% !important;      /* ← P4 size */
+    max-width: 200px !important;
 }
+
+
 
 /* ===== DESKTOP STACK CLASSES ===== */
 .desktop-stack {
